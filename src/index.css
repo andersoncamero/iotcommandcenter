@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--paper);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-primary: #0b98dfde;
+}
+
+/* Estilos específicos para el fondo cuadriculado y hero de la landing */
+
+:root {
+  --paper: #eef6fb; /* color base del papel */
+  --grid-line: rgba(13, 60, 100, 0.06); /* color líneas cuadricula */
+  --grid-size: 20px; /* distancia entre líneas de la cuadricula */
+  --grid-line-width: 2px; /* grosor de la linea de la cuadricula */
+  --accent: #0b98dfde; /* color azul destacado */
+  --dark: #0b2536; /* texto principal */
+  --muted: #415a6b; /* texto secundario */
+  --shadow-glow: 0 12px 30px rgba(11, 152, 223, 0.178);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  top: auto;
+}
+
+body {
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: var(--paper);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .signal-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /*cuadirculas*/
+  .tech-grid {
+    background-image: radial-gradient(
+        circle at 50% 6%,
+        rgba(11, 151, 223, 0.06),
+        transparent 120px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        var(--grid-line) 0 var(--grid-line-width),
+        transparent var(--grid-line-width) var(--grid-size)
+      ),
+      repeating-linear-gradient(
+        90deg,
+        var(--grid-line) 0 var(--grid-line-width),
+        transparent var(--grid-line-width) var(--grid-size)
+      );
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  /* Clases personalizadas para usar variables CSS */
+  .text-accent {
+    color: var(--accent);
+  }
+
+  .border-accent {
+    border-color: var(--accent);
+  }
+
+  .hover\:text-accent:hover {
+    color: var(--accent);
+  }
+
+  .hover\:border-accent:hover {
+    border-color: var(--accent);
+  }
+
+  .focus-visible\:ring-accent:focus-visible {
+    --tw-ring-color: var(--accent);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Clases para colores del tema */
+  .text-primary {
+    color: var(--accent);
+  }
+
+  .bg-primary {
+    background-color: var(--accent);
+  }
+
+  .text-muted-foreground {
+    color: var(--muted);
+  }
+
+  .bg-secondary {
+    background-color: rgba(238, 246, 251, 1);
+  }
+
+  .bg-secondary\/50 {
+    background-color: rgba(238, 246, 251, 0.5);
+  }
+
+  .border-border {
+    border-color: rgba(11, 37, 54, 0.1);
+  }
+
+  .border-border\/50 {
+    border-color: rgba(11, 37, 54, 0.05);
+  }
+
+  .bg-primary\/10 {
+    background-color: rgba(11, 152, 223, 0.1);
+  }
+
+  .bg-accent\/10 {
+    background-color: rgba(11, 152, 223, 0.1);
+  }
+
+  /* Clase global para cards con estilo glassmorphism */
+  .card-glass {
+    @apply rounded-2xl bg-white/60 backdrop-blur-sm border border-white/20 shadow-[0_12px_30px_rgba(15,23,42,0.08)];
+  }
+
+  /* Clase global para botones primarios */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-semibold text-white bg-gradient-to-b from-[#0891d3] to-[#0577bb] shadow-[0_12px_30px_rgba(11,152,223,0.178)];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg px-5 py-3 font-semibold text-[#0b2536] bg-white border border-[rgba(11,37,54,0.21)];
+  }
+}
+
+#earth {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  margin: 0.05em auto;
+  background: #888 url(https://www.un.org/sites/un2.un.org/files/unic-map.png) 0
+    0 repeat;
+  border-radius: 50%;
+  background-size: 630px;
+  animation: rotate 10s linear infinite;
+  transition: transform 200ms linear;
+  transform-style: preserve-3d;
+  box-shadow: inset 20px 0 80px 6px rgb(161, 161, 161);
+  color: #fffefe;
+}
+
+@keyframes rotate {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 630px 0;
+  }
+}

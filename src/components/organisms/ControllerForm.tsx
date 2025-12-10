@@ -85,7 +85,7 @@ export const ControllerForm: React.FC = () => {
     setFormaData((prev) => ({ ...prev, [key]: value }));
   };
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
         <Card typeCard="default" className="w-full relative p-4 card-glass">
           <div className="flex items-center justify-between w-full gap-4">
@@ -150,6 +150,7 @@ export const ControllerForm: React.FC = () => {
           onClose={() => setSyncModalOpen(false)}
           onSync={handleSync}
           loading={syncLoading}
+          label="Sincronizar Controladores"
         />
       </div>
     </div>

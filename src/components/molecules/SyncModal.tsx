@@ -11,6 +11,7 @@ interface SyncModalProps {
   onClose: () => void;
   onSync: (addr: string) => void;
   loading: boolean;
+  label?: string
 }
 
 export const SyncModal: React.FC<SyncModalProps> = ({
@@ -18,6 +19,7 @@ export const SyncModal: React.FC<SyncModalProps> = ({
   onClose,
   onSync,
   loading,
+  label
 }) => {
   const [syncAddr, setSyncAddr] = useState("");
 
@@ -30,18 +32,18 @@ export const SyncModal: React.FC<SyncModalProps> = ({
   return (
     <Card
       typeCard="default"
-      className="fixed inset-0 card-glass flex items-center justify-center z-50"
+      className="fixed inset-1.5 card-glass flex items-center justify-center z-50"
     >
       <Card
         typeCard="default"
-        className="bg-white rounded-lg card-glass shadow-xl w-full max-w-md mx-4 animate-in fade-in slide-in-from-bottom-4"
+        className="rounded-lg card-glass shadow-xl w-full max-w-md mx-4 animate-in fade-in slide-in-from-bottom-4"
       >
         <Card
           typeCard="title"
           className="flex items-center justify-between p-6"
         >
           <Lable className="font-semibold text-gray-800">
-            Sincronizar Controlador
+            {label}
           </Lable>
           <Button
             onClick={onClose}

@@ -45,7 +45,7 @@ export const Controller: React.FC = () => {
   const loadControllers = async () => {
     try {
       setLoading(true);
-      const dataString = localStorage.getItem("controller");
+      const dataString = localStorage.getItem("controllers");
       if (dataString) {
         const dataController = JSON.parse(dataString);
         setControllers(dataController);

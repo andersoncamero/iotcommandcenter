@@ -42,7 +42,7 @@ export const DevicesPages: React.FC = () => {
   const loadDevices = async () => {
     try {
       setLoading(true);
-      const dataString = localStorage.getItem("controller");
+      const dataString = localStorage.getItem("Devices");
       if (dataString) {
         const dataController = JSON.parse(dataString);
         setDevices(dataController);
@@ -58,7 +58,7 @@ export const DevicesPages: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Cargando controladores...</div>;
+    return <div>Cargando Dispositivos...</div>;
   }
 
   return (

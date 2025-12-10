@@ -1,4 +1,4 @@
-import { ArrowUpRight, Wifi, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { NavLink } from "../molecules/NavLink";
 import { Link } from "react-router";
 import { Button } from "../atoms/Button";
@@ -60,8 +60,12 @@ export const Header: React.FC<HeaderProps> = ({ menuItems }) => {
                 to="/"
                 className="flex items-center gap-2 sm:gap-3 shrink-0"
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-linear-to-br from-[#0891d3] to-[#0577bb] flex items-center justify-center signal-glow shrink-0">
-                  <Wifi className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14">
+                  <img
+                    src="/public/logo_sin_text.png"
+                    alt=""
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="flex flex-col min-w-0">
                   <h1 className="text-base sm:text-lg lg:text-xl font-bold text-[#0b2536] leading-tight whitespace-nowrap">

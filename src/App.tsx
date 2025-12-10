@@ -12,7 +12,7 @@ import { DevicesPages } from "./pages/Devices";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/iotcommandcenter">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />

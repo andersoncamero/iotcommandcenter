@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({ menuItems }) => {
               >
                 <div className="w-12 h-12 sm:w-14 sm:h-14">
                   <img
-                    src="/public/logo_sin_text.png"
+                    src="/iotcommandcenter/logo_sin_text.png"
                     alt=""
                     className="w-full h-full object-contain"
                   />

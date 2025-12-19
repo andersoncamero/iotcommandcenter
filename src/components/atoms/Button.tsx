@@ -20,7 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
     return(
         <button
         onClick={onClick}
-        className={className}
+        className={`gap-2 ${className}`}
         type={type}
         disabled={disabled}
         >

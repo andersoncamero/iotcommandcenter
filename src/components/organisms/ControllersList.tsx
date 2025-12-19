@@ -4,10 +4,10 @@ import { Button } from "../atoms/Button";
 import { Input } from "../atoms/Input";
 import { Table } from "../atoms/Table";
 import { Radio } from "lucide-react";
-import type { Controler } from "../../entities/Controler";
+import type { Controller } from "../../entities/Controller";
 
 interface ControllersListpProps{
-  mockControllers: Array<Controler>
+  mockControllers: Array<Controller>
 }
 
 export const ControllersList: React.FC<ControllersListpProps> = ({mockControllers}) => {

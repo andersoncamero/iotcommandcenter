@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth, type AuthHook } from "../hooks/UseAuth";
+import { useAuth, type AuthHook } from "../hooks/useAuth";
 
 interface AuthContextProps {
   children: React.ReactNode;

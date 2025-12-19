@@ -154,7 +154,7 @@ body {
 
   /* Clase global para botones primarios */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-semibold text-white bg-gradient-to-b from-[#0891d3] to-[#0577bb] shadow-[0_12px_30px_rgba(11,152,223,0.178)];
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-semibold text-white bg-linear-to-b from-[#0891d3] to-[#0577bb] shadow-[0_12px_30px_rgba(11,152,223,0.178)];
   }
 
   .btn-secondary {

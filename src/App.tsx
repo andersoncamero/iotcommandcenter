@@ -5,9 +5,10 @@ import { HomePage } from "./pages/Home";
 import { Signup } from "./pages/Signup";
 import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
-import { Controller } from "./pages/Controller";
+import { Controllers } from "./pages/Controllers";
 import { AddController } from "./pages/AddController";
-import { DevicesPages } from "./pages/Devices";
+import { LorawanApp } from "./pages/LorawanApp";
+import { ControllerDetail } from "./pages/ControllerDetail";
 
 function App() {
   return (
@@ -18,9 +19,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/controllers" element={<Controller />} />
+          <Route path="/controllers" element={<Controllers />} />
+          <Route path="/controller" element={<ControllerDetail />} />
           <Route path="/add-controller" element={<AddController />} />
-          <Route path="/devices" element={<DevicesPages />} />
+          <Route path="/aplication" element={<LorawanApp />} />
         </Routes>
       </BrowserRouter>
     </>

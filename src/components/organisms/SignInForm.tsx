@@ -33,20 +33,17 @@ export const SignInForm: React.FC = () => {
       const data = await response.json();
       if (!response.ok) {
         alert("Error al iniciar sesion");
-        return
+        return;
       }
       localStorage.setItem("token", data.token);
-      navigate("/dashboard");
-    } catch (error) {
-      alert(error);
-      setError(
-        JSON.stringify(
-          "Error al iniciar sesión. Por favor, intenta de nuevo."
-        ));
+
+    } catch {
+      setError("Error al iniciar sesión. Por favor, intenta de nuevo.");
     } finally {
       setTimeout(() => {
         setLoading(false);
-      }, 300);
+        navigate("/dashboard");
+      }, 500);
     }
   };
 

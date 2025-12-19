@@ -7,22 +7,22 @@ import { HardDrive, Home, LayoutDashboard, Server } from "lucide-react";
 const menuItems = [
   {
     linkTo: "/",
-    label: "Home",
+    label: "Inicio",
     icon: Home,
   },
   {
     linkTo: "/dashboard",
-    label: "dashboard",
+    label: "Dashboard",
     icon: LayoutDashboard,
   },
   {
     linkTo: "/controllers",
-    label: "controllers",
+    label: "controladores",
     icon: Server,
   },
   {
-    linkTo: "/Devices",
-    label: "Devices",
+    linkTo: "/aplication",
+    label: "Aplicaciones",
     icon: HardDrive,
   },
 ];

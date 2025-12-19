@@ -8,17 +8,17 @@ import { Home, LayoutDashboard, ScrollText } from "lucide-react";
 const menuItems = [
   {
     linkTo: "/",
-    label: "Home",
+    label: "Inicio",
     icon: Home,
   },
   {
     linkTo: "/dashboard",
-    label: "dashboard",
+    label: "Dashboard",
     icon: LayoutDashboard,
   },
   {
     linkTo: "/documentation",
-    label: "Documentation",
+    label: "Documentacion",
     icon: ScrollText,
   },
 ];

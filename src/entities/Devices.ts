@@ -16,3 +16,12 @@ interface DeviceStaus {
   ExternalPowerSource: boolean;
   BatteryLevel: number;
 }
+
+export interface LorawanApplication {
+  ID: string;
+  ChirpStackId: string;
+  ControllerId: string;
+  TanantId: string;
+  Name: string;
+  Description: string;
+}

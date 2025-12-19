@@ -1,11 +1,18 @@
-import { AlertCircle, HardDrive, Home, LayoutDashboard, Server } from "lucide-react";
+import {
+  AlertCircle,
+  HardDrive,
+  Home,
+  LayoutDashboard,
+  Server,
+} from "lucide-react";
 import { Header } from "../components/organisms/Header";
 import { DevicesTemplate } from "../templates/DevicesTemplate";
 import { Card } from "../components/atoms/Card";
-import { DevicesHeader } from "../components/molecules/DevicesHeader";
+import { LorawanAppHeader } from "../components/molecules/LorawanAppHeader";
 import { Button } from "../components/atoms/Button";
 import { useEffect, useState } from "react";
 import type { Devices } from "../entities/Devices";
+import { SyncModal } from "../components/molecules/SyncModal";
 
 const menuItems = [
   {
@@ -30,10 +37,15 @@ const menuItems = [
   },
 ];
 
-export const DevicesPages: React.FC = () => {
+export const LorawanApp: React.FC = () => {
   const [devices, setDevices] = useState<Array<Devices>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [syncModalOpen, setSyncModalOpen] = useState(false);
+  const [syncLoading, setSyncLoading] = useState(false);
+  
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     loadDevices();
@@ -57,6 +69,33 @@ export const DevicesPages: React.FC = () => {
     }
   };
 
+  const handleSync = async (addr: string) => {
+    setSyncLoading(true);
+
+    try {
+      const body = { addr_chirpstack: addr };
+      const response = await fetch(
+        import.meta.env.VITE_API_URL + "/devices/sync",
+        {
+          method: "PUT",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      alert(`Controlador sincronizado exitosamente con ${addr} ${data}`);
+      setSyncModalOpen(false);
+    } catch {
+      setError(
+        JSON.stringify("Error al cargar los dispositivos")
+      )
+    } finally {
+      setSyncLoading(false);
+    }
+  };
   if (loading) {
     return <div>Cargando Dispositivos...</div>;
   }
@@ -80,7 +119,7 @@ export const DevicesPages: React.FC = () => {
       <DevicesTemplate>
         <section className="space-y-1">
           <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 flex items-center gap-2">
-            Dispositivos
+            Aplicaciones
             <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 border border-emerald-100">
               Monitoreo IoT
             </span>
@@ -91,7 +130,7 @@ export const DevicesPages: React.FC = () => {
           typeCard="default"
           className="w-full relative p-2 sm:p-4 md:p-6 card-glass"
         >
-          <DevicesHeader />
+          <LorawanAppHeader onSync={() => setSyncModalOpen(true)} />
           <div className="mt-6 gap-4 sm:gap-5">
             {devices.length > 0 ? (
               <div className="flex flex-col sm:flex-row md:flex-row flex-wrap w-full gap-4">
@@ -150,6 +189,14 @@ export const DevicesPages: React.FC = () => {
             )}
           </div>
         </Card>
+        <SyncModal
+          isOpen={syncModalOpen}
+          onClose={() => setSyncModalOpen(false)}
+          onSync={handleSync}
+          loading={syncLoading}
+          label="Sincronizar Dispositivos"
+          error={error}
+        />
       </DevicesTemplate>
     </div>
   );

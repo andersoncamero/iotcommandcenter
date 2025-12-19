@@ -2,7 +2,7 @@ import type React from "react";
 import { Card } from "../atoms/Card";
 import { Lable } from "../atoms/Label";
 import { Button } from "../atoms/Button";
-import { RefreshCcw, X } from "lucide-react";
+import { AlertCircle, RefreshCcw, X } from "lucide-react";
 import { InputWithLabel } from "./InputWithLabel";
 import { useState } from "react";
 
@@ -11,7 +11,8 @@ interface SyncModalProps {
   onClose: () => void;
   onSync: (addr: string) => void;
   loading: boolean;
-  label?: string
+  label?: string;
+  error?: string;
 }
 
 export const SyncModal: React.FC<SyncModalProps> = ({
@@ -19,7 +20,8 @@ export const SyncModal: React.FC<SyncModalProps> = ({
   onClose,
   onSync,
   loading,
-  label
+  label,
+  error = "",
 }) => {
   const [syncAddr, setSyncAddr] = useState("");
 
@@ -38,13 +40,17 @@ export const SyncModal: React.FC<SyncModalProps> = ({
         typeCard="default"
         className="rounded-lg card-glass shadow-xl w-full max-w-md mx-4 animate-in fade-in slide-in-from-bottom-4"
       >
+        {error && (
+          <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm animate-in fade-in slide-in-from-top-1 duration-300">
+            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+            <span>{error}</span>
+          </div>
+        )}
         <Card
           typeCard="title"
           className="flex items-center justify-between p-6"
         >
-          <Lable className="font-semibold text-gray-800">
-            {label}
-          </Lable>
+          <Lable className="font-semibold text-gray-800">{label}</Lable>
           <Button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"

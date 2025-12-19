@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { ControllersList } from "../components/organisms/ControllersList";
 import { Header } from "../components/organisms/Header";
@@ -5,80 +6,46 @@ import { StatsCard } from "../components/organisms/StatsCards";
 import { DashboardTemplate } from "../templates/DashboardTemplate";
 import { Card } from "../components/atoms/Card";
 import { useAuthContext } from "../contexts/AuthContext";
-import type { Controler, LoraGateways } from "../entities/Controler";
+import type { Controller, LoraGateways } from "../entities/Controller";
 import { Home, LayoutDashboard, Server } from "lucide-react";
+import { useControllerByUserId } from "../hooks/useControllerByUserId";
+
 
 const menuItems = [
   {
     linkTo: "/",
-    label: "home",
+    label: "Inicio",
     icon: Home,
   },
   {
     linkTo: "/dashboard",
-    label: "dashboard",
+    label: "Dashboard",
     icon: LayoutDashboard,
   },
   {
     linkTo: "/controllers",
-    label: "controllers",
+    label: "controladores",
     icon: Server,
   },
 ];
 
 export const Dashboard = () => {
-  const [controllers, setControllers] = useState([]);
+  const { user } = useAuthContext();
+  const { controllers = [], loading, error, handleGetControllerByUserId } = useControllerByUserId(user?.user_id ?? null);
   const [activeControllers, setActiveControllers] = useState(0);
   const [gateways, setGatewaysLora] = useState(0);
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const { user } = useAuthContext();
 
   useEffect(() => {
-    if (!user?.user_id) {
-      setLoading(false);
-      return;
-    }
-
-    const loadControllers = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem("token");
-
-        const response = await fetch(
-          import.meta.env.VITE_API_URL + "/controllers/" + user?.user_id,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("error data", errorData);
-        }
-        const data = await response.json();
-        setControllers(data);
-      } catch (error) {
-        setError("Error al cargar los controladores");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadControllers();
+    handleGetControllerByUserId()
   }, [user]);
 
   useEffect(() => {
     if (controllers.length <= 0) return;
-    localStorage.setItem("controller", JSON.stringify(controllers));
+    localStorage.setItem("controllers", JSON.stringify(controllers));
     const statusController = async () => {
       for (let index = 0; index < controllers.length; index++) {
-        const element = controllers[index] as Controler;
+        const element = controllers[index] as Controller;
         const allLoraGateways = element.LoraGateways?.length;
         const onlineGatewaysCount = element.LoraGateways?.filter(
           (controller: LoraGateways) => controller.Status === "ONLINE"
@@ -89,6 +56,8 @@ export const Dashboard = () => {
     };
     statusController();
   }, [controllers]);
+
+
 
   if (loading) {
     return <div>Cargando controladores...</div>;

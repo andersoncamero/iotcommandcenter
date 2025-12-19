@@ -1,8 +1,8 @@
-export interface Controler {
+export interface Controller {
   ID: string;
   UserId: string;
   Name: string;
-  UserchirpstackId: string;
+  UserChirpStackID: string;
   IP: string;
   TenantId: Array<string>;
   Token: string;
